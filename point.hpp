@@ -24,11 +24,8 @@ public:
     return m_y;
   }
 
-  /* The attribute should be private,
-  and accessed by getters and setters, this is not
-  taken in consideration in this implementation*/
 private:
-  int m_x;
-  int m_y;
-  int m_t;
+  int m_x; /*x component of point*/
+  int m_y; /*y component of point*/
+  int m_t; /*t component of point (time)*/
 };
