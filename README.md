@@ -2,6 +2,9 @@
 
 To build and test this program, please dowload the  Digeiz-Trajectories folder and follow these steps :
 
+req : 
+- Linux environnement 
+- Cmake installed 
 
 cd Digeiz-Trajectories <br>
 mkdir Build <br>
