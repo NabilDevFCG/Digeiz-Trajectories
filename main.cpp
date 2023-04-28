@@ -9,9 +9,10 @@ int main(int arc, char *argv[])
 
     TrajManager tjrMnr;
 
+    string sPathToDataFile = argv[1];
 
     /*Constructing trajectories from file*/
-    tjrMnr.constructTrajectories("small_trajectory.dat");
+    tjrMnr.constructTrajectories(sPathToDataFile);
 
 
     int criteria;
@@ -33,6 +34,42 @@ int main(int arc, char *argv[])
         (*it)->dispPoints();
     }
 
+    cout << "Please chose criteria " << endl
+         << "1 ---------------------> length" << endl
+         << "2 ---------------------> speed" << endl;
+    cin >> criteria; // reads an integer from the keyboard
+
+    list<Trajectory *> listClosestTraj;
+    switch (criteria)
+    {
+    case 1:
+        /* code */
+        cout << "you have chosen "
+             << "length" << endl;
+        cout << "Please, chose the trajectory Id from the list above :";
+        cin >> trajectoryId; // reads an integer from the keyboard
+        cout << "You have cosen trajectory : " << trajectoryId << endl;
+        listClosestTraj = tjrMnr.findNClosestLengthTraj(trajectoryId, 3);
+        break;
+    case 2:
+        /* code */
+        cout << "you have chosen "
+             << "speed" << endl;
+        cout << "Please, chose the trajectory Id from the list above : ";
+        cin >> trajectoryId; // reads an integer from the keyboard
+        cout << "You have cosen trajectory : " << trajectoryId << endl;
+        listClosestTraj = tjrMnr.findNClosestSpeedTraj(trajectoryId, 3);
+        break;
+
+    default:
+        break;
+    }
+
+    cout << "here are the closest trajectories based on criteria : " << criteria << endl;
+    for (const Trajectory *id : listClosestTraj)
+    {
+        cout << "Traj Id  " << id->m_Id << "  it's speed  " << id->m_speed << "  it's length  " << id->m_length << endl;
+    }
 
     return 0;
 }
