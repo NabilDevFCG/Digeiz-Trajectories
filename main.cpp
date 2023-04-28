@@ -41,7 +41,7 @@ int main(int arc, char *argv[])
          << "2 ---------------------> speed" << endl;
     cin >> criteria; // reads an integer from the keyboard
 
-    list<Trajectory *> listClosestTraj;
+    list<std::shared_ptr<Trajectory>> listClosestTraj;
     switch (criteria)
     {
     case 1:
@@ -67,8 +67,10 @@ int main(int arc, char *argv[])
         break;
     }
 
+
+
     cout << "here are the closest trajectories based on criteria : " << criteria << endl;
-    for (const Trajectory *id : listClosestTraj)
+    for (const std::shared_ptr<Trajectory> id : listClosestTraj)
     {
         cout << "Traj Id  " << id->m_Id << "  it's speed  " << id->m_speed << "  it's length  " << id->m_length << endl;
     }

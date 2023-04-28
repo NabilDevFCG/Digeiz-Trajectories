@@ -14,7 +14,7 @@ set based on m_length  attribute*/
 struct TrajcustomLengthComparer
 {
 
-  bool operator()(const Trajectory *tjr1, const Trajectory *tjr2) const
+  bool operator()(const std::shared_ptr<Trajectory> tjr1, const std::shared_ptr<Trajectory> tjr2) const
   {
     return tjr1->m_length < tjr2->m_length;
   }
@@ -25,7 +25,7 @@ set based on m_length  attribute*/
 struct TrajcustomSpeedComparer
 {
 
-  bool operator()(const Trajectory *tjr1, const Trajectory *tjr2) const
+  bool operator()(const std::shared_ptr<Trajectory> tjr1, const std::shared_ptr<Trajectory> tjr2) const
   {
     return tjr1->m_speed < tjr2->m_speed;
   }
@@ -40,16 +40,16 @@ TrajManager::~TrajManager()
 
   /*Freeing memory*/
   /*For all trajectories*/
-  for (auto it = m_listTrajs.begin(); it != m_listTrajs.end(); ++it)
-  {
+  // for (auto it = m_listTrajs.begin(); it != m_listTrajs.end(); ++it)
+  // {
 
     /*For all pointes in trajectory*/
     // for (auto ip = (*it)->getTrajectoryPoints().begin(); ip != (*it)->getTrajectoryPoints().end(); ip++)
     // {
     //   delete *ip;
     // }
-    delete *it;
-  }
+    // delete *it;
+  // }
 }
 
 
@@ -59,7 +59,7 @@ TrajManager::~TrajManager()
    \brief add trajectory to trajectories list
    \param trj : trajectory to be added
  */
-void TrajManager::addTrajectory(Trajectory *trj)
+void TrajManager::addTrajectory(std::shared_ptr<Trajectory> trj)
 {
   m_listTrajs.insert(m_listTrajs.begin(), trj);
 }
@@ -72,22 +72,22 @@ void TrajManager::addTrajectory(Trajectory *trj)
    \param criteria : criteria (speed, length)
    \return the ieterator index of found trajectory
  */
-list<Trajectory *>::iterator TrajManager::findTrjById(int id, int criteria)
+list<std::shared_ptr<Trajectory>>::iterator TrajManager::findTrjById(int id, int criteria)
 {
 
-  list<Trajectory *>::iterator it;
+  list<std::shared_ptr<Trajectory>>::iterator it;
   switch (criteria)
   {
   case 1:
     /* trajectory length based research*/
     it = find_if(m_listTrajs.begin(), m_listTrajs.end(),
-                 [&](Trajectory *const &p)
+                 [&](std::shared_ptr<Trajectory> const &p)
                  { return p->m_Id == id; });
     break;
   case 2:
     /* trajectory speed based research*/
     it = find_if(m_listTrajsSpeedSorted.begin(), m_listTrajsSpeedSorted.end(),
-                 [&](Trajectory *const &p)
+                 [&](std::shared_ptr<Trajectory> const &p)
                  { return p->m_Id == id; });
     break;
 
@@ -105,15 +105,15 @@ list<Trajectory *>::iterator TrajManager::findTrjById(int id, int criteria)
    \param n : number of closest trajectories
    \return list of n closest traectories based on length
  */
-list<Trajectory *> TrajManager::findNClosestLengthTraj(int id, int n)
+list<std::shared_ptr<Trajectory>> TrajManager::findNClosestLengthTraj(int id, int n)
 {
 
-  list<Trajectory *>::iterator it = findTrjById(id, 1);
-  list<Trajectory *>::iterator itNext = next(it, 1);
-  list<Trajectory *>::iterator itPriv = prev(it, 1);
+  list<std::shared_ptr<Trajectory>>::iterator it = findTrjById(id, 1);
+  list<std::shared_ptr<Trajectory>>::iterator itNext = next(it, 1);
+  list<std::shared_ptr<Trajectory>>::iterator itPriv = prev(it, 1);
 
-  list<Trajectory *> n2ClosestTrajId;
-  list<Trajectory *> nClosestTrajId;
+  list<std::shared_ptr<Trajectory>> n2ClosestTrajId;
+  list<std::shared_ptr<Trajectory>> nClosestTrajId;
 
   for (int i = 0; i < n; i++)
   {
@@ -137,7 +137,7 @@ list<Trajectory *> TrajManager::findNClosestLengthTraj(int id, int n)
   /*Find the n closest trajectories*/
   for (int i = 0; i < n; i++)
   {
-    auto closest_it = std::min_element(n2ClosestTrajId.begin(), n2ClosestTrajId.end(), [&](Trajectory *a, Trajectory *b)
+    auto closest_it = std::min_element(n2ClosestTrajId.begin(), n2ClosestTrajId.end(), [&](std::shared_ptr<Trajectory> a, std::shared_ptr<Trajectory> b)
                                        { return std::abs(a->m_length - len) < std::abs(b->m_length - len); });
 
     if(closest_it != n2ClosestTrajId.end() )
@@ -160,15 +160,15 @@ list<Trajectory *> TrajManager::findNClosestLengthTraj(int id, int n)
    \param n : number of closest trajectories
    \return list of n closest traectories based on speed
  */
-list<Trajectory *> TrajManager::findNClosestSpeedTraj(int id, int n)
+list<std::shared_ptr<Trajectory>> TrajManager::findNClosestSpeedTraj(int id, int n)
 {
     
-  list<Trajectory *>::iterator it = findTrjById(id, 2);
-  list<Trajectory *>::iterator itNext = next(it, 1);
-  list<Trajectory *>::iterator itPriv = prev(it, 1);
+  list<std::shared_ptr<Trajectory>>::iterator it = findTrjById(id, 2);
+  list<std::shared_ptr<Trajectory>>::iterator itNext = next(it, 1);
+  list<std::shared_ptr<Trajectory>>::iterator itPriv = prev(it, 1);
 
-  list<Trajectory *> n2ClosestTrajId;
-  list<Trajectory *> nClosestTrajId;
+  list<std::shared_ptr<Trajectory>> n2ClosestTrajId;
+  list<std::shared_ptr<Trajectory>> nClosestTrajId;
 
   for (int i = 0; i < n; i++)
   {
@@ -192,7 +192,7 @@ list<Trajectory *> TrajManager::findNClosestSpeedTraj(int id, int n)
   /*Find the n closest trajectories*/
   for (int i = 0; i < n; i++)
   {
-    auto closest_it = std::min_element(n2ClosestTrajId.begin(), n2ClosestTrajId.end(), [&](Trajectory *a, Trajectory *b)
+    auto closest_it = std::min_element(n2ClosestTrajId.begin(), n2ClosestTrajId.end(), [&](std::shared_ptr<Trajectory> a, std::shared_ptr<Trajectory> b)
                                        { return std::abs(a->m_speed - spd) < std::abs(b->m_speed - spd); });
 
     if(closest_it != n2ClosestTrajId.end() )
@@ -250,7 +250,7 @@ void TrajManager::constructTrajectories(std::string Path)
     /*number of points in trajectory*/
     stream >> inbrOfPnt;
 
-    Trajectory *trj = new Trajectory();
+    std::shared_ptr<Trajectory> trj = std::shared_ptr<Trajectory>(new Trajectory());
     for (int inbreOfPnt = 0; inbreOfPnt < inbrOfPnt; inbreOfPnt++)
     {
       stream >> itime;

@@ -38,7 +38,7 @@ void Trajectory::dispPoints()
  */
 void Trajectory::dispInfos()
 {
-    printf("Trajectory :Id %d :spd %lf: lng %lf  ", m_Id, m_speed, m_length);
+    printf("Traj Id %d :spd %lf: lng %lf  ", m_Id, m_speed, m_length);
 }
 
 /*!
