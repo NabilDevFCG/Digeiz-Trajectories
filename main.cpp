@@ -14,7 +14,6 @@ int main(int arc, char *argv[])
     /*Constructing trajectories from file*/
     tjrMnr.constructTrajectories(sPathToDataFile);
 
-
     int criteria;
     int trajectoryId;
 
@@ -33,8 +32,11 @@ int main(int arc, char *argv[])
         (*it)->dispInfos();
         (*it)->dispPoints();
     }
-
-    cout << "Please chose criteria " << endl
+    cout << endl;
+    cout << "You can find the closest trajectories to a chosen " << endl
+         << "trajectory among the trajectories listed above" << endl
+         << "base on 2 criterias, length or speed" << endl;
+    cout << "Please chose criteria :" << endl
          << "1 ---------------------> length" << endl
          << "2 ---------------------> speed" << endl;
     cin >> criteria; // reads an integer from the keyboard
