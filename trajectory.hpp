@@ -6,7 +6,17 @@
 
 using namespace std;
 
+/*Custom points comparer, to be used to sort points
+ based on m_t attribute (time), because in data file 
+ points could be not sorted */
+struct pointCustomComparer
+{
 
+    bool operator()(const Point *p1, const Point *p2) const
+    {
+        return p1->m_t < p2->m_t;
+    }
+};
 
 /*!
    \brief class: Trajectory
@@ -35,6 +45,8 @@ public:
 
     /*List of points, components of a trajectory*/
     list<Point *> m_lisTrajPoints;
+    /*custom points comparer*/
+    pointCustomComparer pntsCustCmp;
     double m_speed;
     double m_length;
     int m_Id;

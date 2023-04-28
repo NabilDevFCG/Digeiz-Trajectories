@@ -258,7 +258,8 @@ void TrajManager::constructTrajectories(std::string Path)
 
       trj->addPoint(new Point(itime, ix, iy));
     }
-
+    /* Sotring point in trajectory based on time (m_t attribute) */
+    trj->m_lisTrajPoints.sort(trj->pntsCustCmp);
     trj->m_Id = inbrOfTraj;
 
     trj->computeLength();
