@@ -117,7 +117,7 @@ list<Trajectory *> TrajManager::findNClosestLengthTraj(int id, int n)
   for (int i = 0; i < n; i++)
   {
 
-    if (itNext != m_listTrajs.end() && itNext != m_listTrajs.begin())
+    if (itNext != m_listTrajs.end() )
     {
       n2ClosestTrajId.insert(n2ClosestTrajId.begin(), (*itNext));
       itNext = next(itNext, 1);
@@ -125,7 +125,7 @@ list<Trajectory *> TrajManager::findNClosestLengthTraj(int id, int n)
   }
   for (int i = 0; i < n; i++)
   {
-    if (itPriv != m_listTrajs.end() && itPriv != m_listTrajs.begin())
+    if (itPriv != m_listTrajs.end() )
     {
       n2ClosestTrajId.insert(n2ClosestTrajId.begin(), (*itPriv));
       itPriv = prev(itPriv, 1);
@@ -172,7 +172,7 @@ list<Trajectory *> TrajManager::findNClosestSpeedTraj(int id, int n)
   for (int i = 0; i < n; i++)
   {
 
-    if (itNext != m_listTrajsSpeedSorted.end() && itNext != m_listTrajsSpeedSorted.begin())
+    if (itNext != m_listTrajsSpeedSorted.end() )
     {
       n2ClosestTrajId.insert(n2ClosestTrajId.begin(), (*itNext));
       itNext = next(itNext, 1);
@@ -180,7 +180,7 @@ list<Trajectory *> TrajManager::findNClosestSpeedTraj(int id, int n)
   }
   for (int i = 0; i < n; i++)
   {
-    if (itPriv != m_listTrajsSpeedSorted.end() && itPriv != m_listTrajsSpeedSorted.begin())
+    if (itPriv != m_listTrajsSpeedSorted.end() )
     {
       n2ClosestTrajId.insert(n2ClosestTrajId.begin(), (*itPriv));
       itPriv = prev(itPriv, 1);
