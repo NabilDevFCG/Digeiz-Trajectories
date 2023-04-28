@@ -23,3 +23,4 @@ set(HEADERS
 
 # On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(CPPDiz ${SRCS} ${HEADERS})
+
