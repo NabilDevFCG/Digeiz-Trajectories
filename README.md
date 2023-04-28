@@ -7,7 +7,9 @@ cd Digeiz-Trajectories <br>
 mkdir Build <br>
 cmake -S . -B Build/ <br>
 cmake --build Build/ <br>
-./Build/CPPDiz  dataFile.dat  (where  dataFile.dat is   small_trajectory.dat  or large_trajectory.dat) <br>
+./Build/CPPDiz small_trajectory.dat <br>
+
+you can change dat file and replace small_trajectory.dat  with large_trajectory.dat or test_trajectory.dat <br>
 
 The program will construct trajectories drom dat file <br> 
 On the CLI you will see the list of trajectories with their Ids (Id if the index of trajectories based on creation time)<br>
