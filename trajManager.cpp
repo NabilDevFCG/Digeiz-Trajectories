@@ -274,7 +274,7 @@ void TrajManager::constructTrajectories(std::string Path)
   TrajcustomLengthComparer cpr;
   this->m_listTrajs.sort(cpr);
 
-  /*Copy list of trajectories to a new list and sot it based on speed*/
+  /*Copy list of trajectories to a new list and sort it based on speed*/
   std::copy(m_listTrajs.begin(), m_listTrajs.end(), std::back_inserter(m_listTrajsSpeedSorted));
 
   /*Sort trajectories based on speed*/

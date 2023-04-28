@@ -20,7 +20,7 @@ void Trajectory::dispPoints()
     for (const Point *p : m_lisTrajPoints)
     {
 
-        printf("(%d,%d,%d) ", p->m_t, p->m_x, p->m_y);
+        printf("(%d,%d,%d) ", p->getT(), p->getT(), p->getT());
         counter++;
         /*Display only the 5 first points*/
         if (counter > 5)
@@ -69,8 +69,8 @@ double Trajectory::computeSpeed()
     auto endP = m_lisTrajPoints.end();
     endP--;
 
-    int startTime = (*startP)->m_t;
-    int endTime = (*endP)->m_t;
+    int startTime = (*startP)->getT();
+    int endTime = (*endP)->getT();
 
     if ((endTime - startTime) > 0)
     {

@@ -14,7 +14,7 @@ struct pointCustomComparer
 
     bool operator()(const Point *p1, const Point *p2) const
     {
-        return p1->m_t < p2->m_t;
+        return p1->getT() < p2->getT();
     }
 };
 
