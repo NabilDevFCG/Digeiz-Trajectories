@@ -17,7 +17,7 @@ Point::Point(int t, int x, int y)
    \brief compute distance between two points Point
  * \return the distance between two points
  */
-double Point::distance(Point *p)
+double Point::distance(std::shared_ptr<Point> p)
 {
 
     /*Distnance between 2 points A and B, d(A,B)=√(x2−x1)2+(y2−y1)2*/

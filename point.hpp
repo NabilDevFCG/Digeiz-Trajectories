@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <memory>
+
 
 /*!
    \brief points : base element of trajectory
@@ -9,7 +11,7 @@ class Point
 public:
   Point(int t, int x, int y);
   /*Compute distance with an other point*/
-  double distance(Point *p);
+  double distance(std::shared_ptr<Point> p);
 
   int getT()const
   {

@@ -4,15 +4,18 @@
 #include <stdio.h>
 #include <algorithm>
 
+#include <memory>
+
+
 using namespace std;
 
 /*Custom points comparer, to be used to sort points
- based on m_t attribute (time), because in data file 
+ based on m_t attribute (time), because in data file
  points could be not sorted */
 struct pointCustomComparer
 {
 
-    bool operator()(const Point *p1, const Point *p2) const
+    bool operator()(const std::shared_ptr<Point> p1, const std::shared_ptr<Point> p2) const
     {
         return p1->getT() < p2->getT();
     }
@@ -27,7 +30,7 @@ class Trajectory
 public:
     Trajectory();
     /* Add point to trajectory*/
-    void addPoint(Point *p);
+    void addPoint(std::shared_ptr<Point> p);
     /* Display point of a trajectory*/
     void dispPoints();
     /* Display infos of a trajectory (speed, length)*/
@@ -43,11 +46,18 @@ public:
     and accessed by getters and setters, this is not
     taken in consideration in this implementation*/
 
-    /*List of points, components of a trajectory*/
-    list<Point *> m_lisTrajPoints;
+    list<std::shared_ptr<Point>> getTrajectoryPoints() 
+    {
+        return m_lisTrajPoints;
+    }
+
     /*custom points comparer*/
     pointCustomComparer pntsCustCmp;
     double m_speed;
     double m_length;
     int m_Id;
+
+private:
+    /*List of points, components of a trajectory*/
+    list<std::shared_ptr<Point>> m_lisTrajPoints;
 };

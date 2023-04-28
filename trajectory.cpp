@@ -5,7 +5,7 @@ Trajectory::Trajectory()
 {
 }
 
-void Trajectory::addPoint(Point *p)
+void Trajectory::addPoint(std::shared_ptr<Point> p)
 {
     m_lisTrajPoints.insert(m_lisTrajPoints.begin(), p);
 }
@@ -17,7 +17,7 @@ void Trajectory::addPoint(Point *p)
 void Trajectory::dispPoints()
 {
     int counter = 0;
-    for (const Point *p : m_lisTrajPoints)
+    for (const std::shared_ptr<Point> p : m_lisTrajPoints)
     {
 
         printf("(%d,%d,%d) ", p->getT(), p->getT(), p->getT());

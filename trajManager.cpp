@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <list>
 
+
 using namespace std;
 
 /*Custom comparer to order Trajectories int
@@ -43,10 +44,10 @@ TrajManager::~TrajManager()
   {
 
     /*For all pointes in trajectory*/
-    for (auto ip = (*it)->m_lisTrajPoints.begin(); ip != (*it)->m_lisTrajPoints.end(); ip++)
-    {
-      delete *ip;
-    }
+    // for (auto ip = (*it)->getTrajectoryPoints().begin(); ip != (*it)->getTrajectoryPoints().end(); ip++)
+    // {
+    //   delete *ip;
+    // }
     delete *it;
   }
 }
@@ -256,10 +257,13 @@ void TrajManager::constructTrajectories(std::string Path)
       stream >> ix;
       stream >> iy;
 
-      trj->addPoint(new Point(itime, ix, iy));
+      // trj->addPoint(new Point(itime, ix, iy));
+      trj->addPoint(std::shared_ptr<Point>(new Point(itime, ix, iy)));
+
+      
     }
     /* Sotring point in trajectory based on time (m_t attribute) */
-    trj->m_lisTrajPoints.sort(trj->pntsCustCmp);
+    trj->getTrajectoryPoints().sort(trj->pntsCustCmp);
     trj->m_Id = inbrOfTraj;
 
     trj->computeLength();
